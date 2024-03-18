@@ -20,8 +20,8 @@ time: list = [np.datetime64(drifter[i][0]) for i in range(N)]
 projection: object = cartopy.crs.PlateCarree()
 
 # initialisatie van de figuur
-fig = plt.figure(figsize=(12, 5))
-ax = fig.add_subplot(1, 1, 1, projection=projection)
+fig: object = plt.figure(figsize=(12, 5))
+ax: object = fig.add_subplot(1, 1, 1, projection=projection)
 
 # plot de kustlijnen en maak het land beige
 ax.coastlines(resolution='50m')
@@ -32,7 +32,7 @@ ax.add_feature(cartopy.feature.LAND)
 ax.plot(lon, lat, transform=cartopy.crs.PlateCarree())
 
 # de code hieronder plot lichtgrijze lijnen voor het longitude/latitude grid en zorgt voor goede formatiing van de labels
-gl = ax.gridlines(crs=cartopy.crs.PlateCarree(), draw_labels=True, linewidth=0.5,
+gl: object = ax.gridlines(crs=cartopy.crs.PlateCarree(), draw_labels=True, linewidth=0.5,
               color='gray', alpha=0.5, linestyle='--')
 gl.top_labels = False
 gl.right_labels = False
