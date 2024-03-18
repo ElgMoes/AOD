@@ -10,10 +10,16 @@ with open('TrAtlDrifter.json') as fp:
     drifter: list = json.load(fp)
 
 N: int = len(drifter)
-if N > 2000: Indexes: tuple = (2000, N)
 lon: list = [drifter[i][2] for i in range(N)]
 lat: list = [drifter[i][1] for i in range(N)]
 time: list = [np.datetime64(drifter[i][0]) for i in range(N)]
+
+begin: int = 1500
+eind: int = 2500
+
+lon_b: list = lon[begin:eind]
+lat_b: list = lat[begin:eind]
+time_b: list = time[begin:eind]
 
 # We gebruiken hieronder de PlateCarree projectie;
 # op de Cartopy website kun je ook andere projecties vinden als je daar meet wilt spelen
@@ -29,7 +35,7 @@ ax.add_feature(cartopy.feature.LAND)
 
 # plot het traject, let op dat we een transformatie moeten gebruiken naar cartopy.crs.PlateCarree(),
 # ook als je hierboven de projectie hebt veranderd
-ax.plot(lon, lat, transform=cartopy.crs.PlateCarree())
+ax.plot(lon_b, lat_b, transform=cartopy.crs.PlateCarree())
 
 # de code hieronder plot lichtgrijze lijnen voor het longitude/latitude grid en zorgt voor goede formatiing van de labels
 gl: object = ax.gridlines(crs=cartopy.crs.PlateCarree(), draw_labels=True, linewidth=0.5,
